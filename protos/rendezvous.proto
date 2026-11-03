@@ -227,10 +227,15 @@ message PeerDiscovery {
 message OnlineRequest {
   string id = 1;
   repeated string peers = 2;
+  // Ask for every online peer instead of the states of `peers`. An addition of
+  // ours: a server without it ignores the field and lists nothing.
+  bool list_online = 100;
 }
 
 message OnlineResponse {
   bytes states = 1;
+  // The online peers, when the request set `list_online`, without the requester.
+  repeated string online_peers = 100;
 }
 
 message KeyExchange {
